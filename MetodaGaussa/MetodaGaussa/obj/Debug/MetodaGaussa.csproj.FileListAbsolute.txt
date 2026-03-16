@@ -9,3 +9,13 @@ C:\Users\danie\OneDrive\Pulpit\Metody Numeryczne\MetodaGaussa\MetodaGaussa\obj\D
 C:\Users\danie\OneDrive\Pulpit\Metody Numeryczne\MetodaGaussa\MetodaGaussa\obj\Debug\MetodaGaussa.exe
 C:\Users\danie\OneDrive\Pulpit\Metody Numeryczne\MetodaGaussa\MetodaGaussa\obj\Debug\MetodaGaussa.pdb
 C:\Users\danie\OneDrive\Pulpit\Metody Numeryczne\MetodaGaussa\MetodaGaussa\obj\Debug\MetodaGaussa.exe.config
+C:\Users\Administrator\source\repos\Metody-Numeryczne\MetodaGaussa\MetodaGaussa\bin\Debug\MetodaGaussa.exe.config
+C:\Users\Administrator\source\repos\Metody-Numeryczne\MetodaGaussa\MetodaGaussa\bin\Debug\MetodaGaussa.exe
+C:\Users\Administrator\source\repos\Metody-Numeryczne\MetodaGaussa\MetodaGaussa\bin\Debug\MetodaGaussa.pdb
+C:\Users\Administrator\source\repos\Metody-Numeryczne\MetodaGaussa\MetodaGaussa\obj\Debug\MetodaGaussa.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\Metody-Numeryczne\MetodaGaussa\MetodaGaussa\obj\Debug\MetodaGaussa.Form1.resources
+C:\Users\Administrator\source\repos\Metody-Numeryczne\MetodaGaussa\MetodaGaussa\obj\Debug\MetodaGaussa.Properties.Resources.resources
+C:\Users\Administrator\source\repos\Metody-Numeryczne\MetodaGaussa\MetodaGaussa\obj\Debug\MetodaGaussa.csproj.GenerateResource.cache
+C:\Users\Administrator\source\repos\Metody-Numeryczne\MetodaGaussa\MetodaGaussa\obj\Debug\MetodaGaussa.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\Metody-Numeryczne\MetodaGaussa\MetodaGaussa\obj\Debug\MetodaGaussa.exe
+C:\Users\Administrator\source\repos\Metody-Numeryczne\MetodaGaussa\MetodaGaussa\obj\Debug\MetodaGaussa.pdb

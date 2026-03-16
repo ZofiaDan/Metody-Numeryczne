@@ -19,10 +19,12 @@ namespace MetodaGaussa
         }
 
         int N; //liczba równań
+        double[] X, B; //wektor niewiadomych i wyrazów wolnych
+        double[,] A; //macierz współczynników
 
         void format()
         {
-            N = (int)numericUpDown1.Value;
+            
             // macierz
             dataGridView1.ColumnCount = N;
             dataGridView1.RowCount = N;
@@ -36,11 +38,14 @@ namespace MetodaGaussa
         
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
+            N = (int)numericUpDown1.Value;
+            trackBar1.Value = N;
             format();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button3.Enabled = true;
             Random random = new Random();
             double x;
             for (int i = 0; i < N; i++)
@@ -52,6 +57,51 @@ namespace MetodaGaussa
                 }
                 x = random.Next(-100, 100) + random.NextDouble();
                 dataGridView3[0, i].Value = x.ToString("0.0");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            B = new double[N+1];
+            X = new double[N+1];
+            A = new double[N+1, N+1];
+
+                for (int i = 0; i < N; i++)
+                {
+                    B[i+1] = double.Parse(dataGridView3[0,i].Value.ToString());
+                    for (int j = 0; j < N; j++)
+                    {
+                        A[i+1, j+1] = double.Parse(dataGridView1[j, i].Value.ToString());
+                }
+            }
+        }
+
+        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            N = trackBar1.Value;
+            numericUpDown1.Value = N;
+            format();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            button3.Enabled = true;
+            Random random = new Random();
+            double r_value, sumator = 0;
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    r_value = random.Next(-21, 21);
+                    dataGridView1[i, j].Value = r_value.ToString("0.00");
+                    sumator += r_value;
+                }
+                dataGridView3[0, i].Value = sumator;
             }
         }
     }
