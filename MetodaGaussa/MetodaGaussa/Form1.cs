@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BIBLIOTEKA_NR1.Liniowe;
 
 namespace MetodaGaussa
 {
@@ -15,12 +16,15 @@ namespace MetodaGaussa
         public Form1()
         {
             InitializeComponent();
+            N = 5;
             format();
         }
 
         int N; //liczba równań
         double[] X, B; //wektor niewiadomych i wyrazów wolnych
         double[,] A; //macierz współczynników
+
+       
 
         void format()
         {
@@ -65,8 +69,9 @@ namespace MetodaGaussa
             B = new double[N+1];
             X = new double[N+1];
             A = new double[N+1, N+1];
+            int y = Gauss.Rozwiaz(A, B, X, 1e-5);
 
-                for (int i = 0; i < N; i++)
+            for (int i = 0; i < N; i++)
                 {
                     B[i+1] = double.Parse(dataGridView3[0,i].Value.ToString());
                     for (int j = 0; j < N; j++)
@@ -74,6 +79,12 @@ namespace MetodaGaussa
                         A[i+1, j+1] = double.Parse(dataGridView1[j, i].Value.ToString());
                 }
             }
+
+             for (int j = 0; j < N; j++)
+                {
+                    dataGridView2[0, j].Value = X[j + 1].ToString("0.00");
+                }
+
         }
 
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)

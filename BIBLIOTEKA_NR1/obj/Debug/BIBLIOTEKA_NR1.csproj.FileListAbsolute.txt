@@ -1,0 +1,6 @@
+C:\Users\Administrator\source\repos\Metody-Numeryczne\BIBLIOTEKA_NR1\bin\Debug\BIBLIOTEKA_NR1.dll
+C:\Users\Administrator\source\repos\Metody-Numeryczne\BIBLIOTEKA_NR1\bin\Debug\BIBLIOTEKA_NR1.pdb
+C:\Users\Administrator\source\repos\Metody-Numeryczne\BIBLIOTEKA_NR1\obj\Debug\BIBLIOTEKA_NR1.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\Metody-Numeryczne\BIBLIOTEKA_NR1\obj\Debug\BIBLIOTEKA_NR1.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\Metody-Numeryczne\BIBLIOTEKA_NR1\obj\Debug\BIBLIOTEKA_NR1.dll
+C:\Users\Administrator\source\repos\Metody-Numeryczne\BIBLIOTEKA_NR1\obj\Debug\BIBLIOTEKA_NR1.pdb
