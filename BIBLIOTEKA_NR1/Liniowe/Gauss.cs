@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace BIBLIOTEKA_NR1.Liniowe
 {
@@ -64,6 +65,94 @@ namespace BIBLIOTEKA_NR1.Liniowe
                 blad = 0;
             }
             else blad = 2;
+            return blad;
+        }
+
+        /// <summary>
+        /// Metoda Gaussa dla liczb urojonych (Complex)
+        /// Rozwiązuje układ równań liniowych z zespolonymi współczynnikami
+        /// </summary>
+        /// <param name="A">Macierz zespolonych współczynników (A[1..N, 1..N])</param>
+        /// <param name="B">Wektor zespolonych wyrazów wolnych (B[1..N])</param>
+        /// <param name="X">Wektor rozwiązań (X[1..N])</param>
+        /// <param name="eps">Dokładność (epsilon)</param>
+        /// <returns>0 - OK, 2 - wymiary się nie zgadzają, 3 - macierz osobliwa</returns>
+        public static int RozwiazComplex(Complex[,] A, Complex[] B, Complex[] X, double eps)
+        {
+            int i, j, k, blad, N, M, R;
+            double T;
+            Complex ZT, ZS;
+            double MA;
+            double a1 = 1.0;
+
+            N = A.GetLength(0) - 1;
+            M = A.GetLength(1) - 1;
+            R = B.Length - 1;
+
+            if (N == M && N == R)
+            {
+                // Konstrukcja ciągu macierzy A(i) oraz ciągu macierzy B(i)
+                for (i = 1; i <= N; i++)
+                {
+                    // Wybór elementu głównego (największy moduł)
+                    T = Complex.Abs(A[i, i]);
+                    k = i;
+                    for (j = i + 1; j <= N; j++)
+                    {
+                        MA = Complex.Abs(A[j, i]);
+                        if (MA > T) { T = MA; k = j; }
+                    }
+
+                    if (T < eps)
+                    {
+                        // Nie istnieje rozwiązanie - macierz osobliwa
+                        blad = 3;
+                        return blad;
+                    }
+
+                    if (i != k)
+                    {
+                        // Zamiana wiersza k-tego z i-tym
+                        ZS = B[k];
+                        B[k] = B[i];
+                        B[i] = ZS;
+
+                        for (j = N; j >= i; j--)
+                        {
+                            ZS = A[k, j];
+                            A[k, j] = A[i, j];
+                            A[i, j] = ZS;
+                        }
+                    }
+
+                    ZT = new Complex(a1, 0) / A[i, i];
+                    A[i, i] = ZT;
+
+                    for (j = i + 1; j <= N; j++)
+                    {
+                        ZS = A[j, i] * ZT;
+                        B[j] -= B[i] * ZS;
+                        for (k = i + 1; k <= N; k++)
+                            A[j, k] -= A[i, k] * ZS;
+                    }
+                }
+
+                // Rozwiązywanie układu trójkątnego metodą postępowania wstecz
+                for (i = N; i >= 1; i--)
+                {
+                    ZT = B[i];
+                    for (j = i + 1; j <= N; j++)
+                        ZT -= A[i, j] * X[j];
+                    X[i] = ZT * A[i, i];
+                }
+
+                blad = 0;
+            }
+            else
+            {
+                blad = 2;
+            }
+
             return blad;
         }
 

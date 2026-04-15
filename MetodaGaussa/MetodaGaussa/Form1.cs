@@ -69,7 +69,6 @@ namespace MetodaGaussa
             B = new double[N+1];
             X = new double[N+1];
             A = new double[N+1, N+1];
-            int y = Gauss.Rozwiaz(A, B, X, 1e-5);
 
             for (int i = 0; i < N; i++)
                 {
@@ -79,6 +78,7 @@ namespace MetodaGaussa
                         A[i+1, j+1] = double.Parse(dataGridView1[j, i].Value.ToString());
                 }
             }
+            int y = Gauss.Rozwiaz(A, B, X, 1e-5);
 
              for (int j = 0; j < N; j++)
                 {
