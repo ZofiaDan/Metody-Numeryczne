@@ -1,0 +1,72 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options
+.vs/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Visual Studio user-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build lock file
+project.lock.json
+project.assets.json
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+*.nuget.props
+*.nuget.targets
+.nuget/
+
+# Local packages
+packages/
+
+# ReSharper
+.resharper
+.resharper.user
+*.DotSettings.user
+
+# User-specific files
+*.VisualState.xml
+
+# Test Results
+TestResults/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+*.lnk
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Windows user file
+*.user

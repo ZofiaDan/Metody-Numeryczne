@@ -42,11 +42,15 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButtonComplex = new System.Windows.Forms.RadioButton();
+            this.radioButtonReal = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -66,7 +70,7 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(121, 211);
+            this.dataGridView1.Location = new System.Drawing.Point(121, 259);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
@@ -103,7 +107,7 @@
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(600, 211);
+            this.dataGridView2.Location = new System.Drawing.Point(602, 259);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
@@ -115,7 +119,7 @@
             // 
             this.dataGridView3.AllowUserToAddRows = false;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(821, 211);
+            this.dataGridView3.Location = new System.Drawing.Point(821, 259);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersWidth = 51;
@@ -217,11 +221,48 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "10";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButtonComplex);
+            this.groupBox1.Controls.Add(this.radioButtonReal);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(111, 154);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(441, 69);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Typ liczb";
+            // 
+            // radioButtonComplex
+            // 
+            this.radioButtonComplex.AutoSize = true;
+            this.radioButtonComplex.Location = new System.Drawing.Point(245, 22);
+            this.radioButtonComplex.Name = "radioButtonComplex";
+            this.radioButtonComplex.Size = new System.Drawing.Size(193, 33);
+            this.radioButtonComplex.TabIndex = 1;
+            this.radioButtonComplex.Text = "Liczby urojone";
+            this.radioButtonComplex.UseVisualStyleBackColor = true;
+            this.radioButtonComplex.CheckedChanged += new System.EventHandler(this.radioButtonComplex_CheckedChanged);
+            // 
+            // radioButtonReal
+            // 
+            this.radioButtonReal.AutoSize = true;
+            this.radioButtonReal.Checked = true;
+            this.radioButtonReal.Location = new System.Drawing.Point(6, 22);
+            this.radioButtonReal.Name = "radioButtonReal";
+            this.radioButtonReal.Size = new System.Drawing.Size(234, 33);
+            this.radioButtonReal.TabIndex = 0;
+            this.radioButtonReal.TabStop = true;
+            this.radioButtonReal.Text = "Liczby rzeczywiste";
+            this.radioButtonReal.UseVisualStyleBackColor = true;
+            this.radioButtonReal.CheckedChanged += new System.EventHandler(this.radioButtonReal_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1635, 666);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.trackBar1);
@@ -244,6 +285,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,6 +308,9 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButtonComplex;
+        private System.Windows.Forms.RadioButton radioButtonReal;
     }
 }
 
