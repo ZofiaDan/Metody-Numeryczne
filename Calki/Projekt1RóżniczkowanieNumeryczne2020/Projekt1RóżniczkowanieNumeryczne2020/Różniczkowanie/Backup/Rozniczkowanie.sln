@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rozniczkowanie", "Rozniczkowanie.csproj", "{C55DD02E-31FD-4DED-8F18-ADB731271076}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSBibliotekaStudent", "..\..\..\CSBibliotekaStudent\CSBibliotekaStudent\CSBibliotekaStudent.csproj", "{5B61CAB8-5059-4B59-8B1A-5DC8F600E7CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C55DD02E-31FD-4DED-8F18-ADB731271076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C55DD02E-31FD-4DED-8F18-ADB731271076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C55DD02E-31FD-4DED-8F18-ADB731271076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C55DD02E-31FD-4DED-8F18-ADB731271076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B61CAB8-5059-4B59-8B1A-5DC8F600E7CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B61CAB8-5059-4B59-8B1A-5DC8F600E7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B61CAB8-5059-4B59-8B1A-5DC8F600E7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B61CAB8-5059-4B59-8B1A-5DC8F600E7CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
