@@ -44,10 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalkiPochodne\Calka.cs" />
+    <Compile Include="CalkiPochodne\Ekstrapolacja.cs" />
+    <Compile Include="CalkiPochodne\Pochodna.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Liniowe\Gauss.cs" />
     <Compile Include="NieLiniowe\Metode_Newtona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11723.231 stable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalkowanieTest", "CalkowanieTest\CalkowanieTest.csproj", "{7439A969-8202-475D-BC50-81E36D05D6FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIBLIOTEKA_NR1", "..\..\..\BIBLIOTEKA_NR1\BIBLIOTEKA_NR1.csproj", "{9AD9C47D-4B0B-4D30-80C5-7AF72BDE1A27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7439A969-8202-475D-BC50-81E36D05D6FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7439A969-8202-475D-BC50-81E36D05D6FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7439A969-8202-475D-BC50-81E36D05D6FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7439A969-8202-475D-BC50-81E36D05D6FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AD9C47D-4B0B-4D30-80C5-7AF72BDE1A27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AD9C47D-4B0B-4D30-80C5-7AF72BDE1A27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AD9C47D-4B0B-4D30-80C5-7AF72BDE1A27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AD9C47D-4B0B-4D30-80C5-7AF72BDE1A27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C94B8AD-5A1C-49BF-81F6-B1744C52EF12}
+	EndGlobalSection
+EndGlobal
