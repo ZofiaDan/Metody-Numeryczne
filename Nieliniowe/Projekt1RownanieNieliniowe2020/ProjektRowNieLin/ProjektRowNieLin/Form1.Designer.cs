@@ -42,14 +42,10 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxProblem = new System.Windows.Forms.ComboBox();
-            this.labelVar1 = new System.Windows.Forms.Label();
-            this.labelVar2 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -176,37 +172,6 @@
             this.comboBoxProblem.TabIndex = 11;
             this.comboBoxProblem.SelectedIndexChanged += new System.EventHandler(this.comboBoxProblem_SelectedIndexChanged);
             // 
-            // labelVar1
-            // 
-            this.labelVar1.AutoSize = true;
-            this.labelVar1.Location = new System.Drawing.Point(63, 219);
-            this.labelVar1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelVar1.Name = "labelVar1";
-            this.labelVar1.Size = new System.Drawing.Size(38, 20);
-            this.labelVar1.TabIndex = 12;
-            this.labelVar1.Text = "x1 =";
-            // 
-            // labelVar2
-            // 
-            this.labelVar2.AutoSize = true;
-            this.labelVar2.Location = new System.Drawing.Point(165, 219);
-            this.labelVar2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelVar2.Name = "labelVar2";
-            this.labelVar2.Size = new System.Drawing.Size(38, 20);
-            this.labelVar2.TabIndex = 13;
-            this.labelVar2.Text = "x2 =";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::ProjektRowNieLin.Properties.Resources.Wykres2;
-            this.pictureBox2.Location = new System.Drawing.Point(32, 523);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(516, 322);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ProjektRowNieLin.Properties.Resources.Wykres1;
@@ -237,13 +202,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1506, 863);
-            this.Controls.Add(this.labelVar2);
-            this.Controls.Add(this.labelVar1);
             this.Controls.Add(this.comboBoxProblem);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.button2);
@@ -255,7 +217,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -271,13 +232,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxProblem;
-        private System.Windows.Forms.Label labelVar1;
-        private System.Windows.Forms.Label labelVar2;
     }
 }
 
