@@ -30,153 +30,200 @@
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.TabelaFunkcji = new System.Windows.Forms.DataGridView();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelAbout = new System.Windows.Forms.Label();
+            this.groupBoxInputs = new System.Windows.Forms.GroupBox();
+            this.buttonReset = new System.Windows.Forms.Button();
+            this.buttonSolve = new System.Windows.Forms.Button();
+            this.textBoxV0 = new System.Windows.Forms.TextBox();
+            this.labelV0 = new System.Windows.Forms.Label();
+            this.textBoxX0 = new System.Windows.Forms.TextBox();
+            this.labelX0 = new System.Windows.Forms.Label();
+            this.textBoxDt = new System.Windows.Forms.TextBox();
+            this.labelDt = new System.Windows.Forms.Label();
+            this.textBoxTEnd = new System.Windows.Forms.TextBox();
+            this.labelTEnd = new System.Windows.Forms.Label();
+            this.textBoxT0 = new System.Windows.Forms.TextBox();
+            this.labelT0 = new System.Windows.Forms.Label();
+            this.textBoxMu = new System.Windows.Forms.TextBox();
+            this.labelMu = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            ((System.ComponentModel.ISupportInitialize)(this.TabelaFunkcji)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.groupBoxInputs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
-            // TabelaFunkcji
+            // labelAbout
             // 
-            this.TabelaFunkcji.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.TabelaFunkcji.Location = new System.Drawing.Point(2, 11);
-            this.TabelaFunkcji.Margin = new System.Windows.Forms.Padding(2);
-            this.TabelaFunkcji.Name = "TabelaFunkcji";
-            this.TabelaFunkcji.Size = new System.Drawing.Size(1025, 201);
-            this.TabelaFunkcji.TabIndex = 7;
-            this.TabelaFunkcji.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TabelaFunkcji_CellClick);
+            this.labelAbout.AutoSize = true;
+            this.labelAbout.Location = new System.Drawing.Point(12, 9);
+            this.labelAbout.Name = "labelAbout";
+            this.labelAbout.Size = new System.Drawing.Size(948, 52);
+            this.labelAbout.TabIndex = 0;
+            this.labelAbout.Text = "Van der Pol oscillator: x'' - mu(1 - x^2)x' + x = 0\r\nSystem form: x' = v, v' = mu(1 - x^2)v - x\r\nSet parameters below and click Solve to integrate with fixed-step RK4.";
             // 
-            // trackBar1
+            // groupBoxInputs
             // 
-            this.trackBar1.Location = new System.Drawing.Point(12, 218);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.trackBar1.Maximum = 1000;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(976, 45);
-            this.trackBar1.TabIndex = 8;
-            this.trackBar1.Value = 400;
-            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
+            this.groupBoxInputs.Controls.Add(this.buttonReset);
+            this.groupBoxInputs.Controls.Add(this.buttonSolve);
+            this.groupBoxInputs.Controls.Add(this.textBoxV0);
+            this.groupBoxInputs.Controls.Add(this.labelV0);
+            this.groupBoxInputs.Controls.Add(this.textBoxX0);
+            this.groupBoxInputs.Controls.Add(this.labelX0);
+            this.groupBoxInputs.Controls.Add(this.textBoxDt);
+            this.groupBoxInputs.Controls.Add(this.labelDt);
+            this.groupBoxInputs.Controls.Add(this.textBoxTEnd);
+            this.groupBoxInputs.Controls.Add(this.labelTEnd);
+            this.groupBoxInputs.Controls.Add(this.textBoxT0);
+            this.groupBoxInputs.Controls.Add(this.labelT0);
+            this.groupBoxInputs.Controls.Add(this.textBoxMu);
+            this.groupBoxInputs.Controls.Add(this.labelMu);
+            this.groupBoxInputs.Location = new System.Drawing.Point(15, 72);
+            this.groupBoxInputs.Name = "groupBoxInputs";
+            this.groupBoxInputs.Size = new System.Drawing.Size(1049, 86);
+            this.groupBoxInputs.TabIndex = 1;
+            this.groupBoxInputs.TabStop = false;
+            this.groupBoxInputs.Text = "Parameters";
             // 
-            // textBox2
+            // buttonReset
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox2.Location = new System.Drawing.Point(11, 275);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(530, 21);
-            this.textBox2.TabIndex = 9;
-            this.textBox2.Text = "Obliczanie pochodnych funkcji w wybranym punkcie w przedziale od 0 do 2;      x =" +
-    "";
+            this.buttonReset.Location = new System.Drawing.Point(944, 33);
+            this.buttonReset.Name = "buttonReset";
+            this.buttonReset.Size = new System.Drawing.Size(90, 30);
+            this.buttonReset.TabIndex = 13;
+            this.buttonReset.Text = "Reset";
+            this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
-            // textBox1
+            // buttonSolve
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox1.Location = new System.Drawing.Point(546, 271);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(98, 21);
-            this.textBox1.TabIndex = 10;
+            this.buttonSolve.Location = new System.Drawing.Point(848, 33);
+            this.buttonSolve.Name = "buttonSolve";
+            this.buttonSolve.Size = new System.Drawing.Size(90, 30);
+            this.buttonSolve.TabIndex = 12;
+            this.buttonSolve.Text = "Solve";
+            this.buttonSolve.UseVisualStyleBackColor = true;
+            this.buttonSolve.Click += new System.EventHandler(this.buttonSolve_Click);
             // 
-            // numericUpDown1
+            // textBoxV0
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.numericUpDown1.Location = new System.Drawing.Point(290, 302);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(43, 21);
-            this.numericUpDown1.TabIndex = 11;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
+            this.textBoxV0.Location = new System.Drawing.Point(733, 39);
+            this.textBoxV0.Name = "textBoxV0";
+            this.textBoxV0.Size = new System.Drawing.Size(89, 20);
+            this.textBoxV0.TabIndex = 11;
             // 
-            // label1
+            // labelV0
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(20, 304);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(264, 15);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Błąd różniczkowania   eps=10^(-n) ;  n =";
+            this.labelV0.AutoSize = true;
+            this.labelV0.Location = new System.Drawing.Point(649, 42);
+            this.labelV0.Name = "labelV0";
+            this.labelV0.Size = new System.Drawing.Size(78, 13);
+            this.labelV0.TabIndex = 10;
+            this.labelV0.Text = "v0 = x'(0)";
+            // 
+            // textBoxX0
+            // 
+            this.textBoxX0.Location = new System.Drawing.Point(554, 39);
+            this.textBoxX0.Name = "textBoxX0";
+            this.textBoxX0.Size = new System.Drawing.Size(89, 20);
+            this.textBoxX0.TabIndex = 9;
+            // 
+            // labelX0
+            // 
+            this.labelX0.AutoSize = true;
+            this.labelX0.Location = new System.Drawing.Point(521, 42);
+            this.labelX0.Name = "labelX0";
+            this.labelX0.Size = new System.Drawing.Size(27, 13);
+            this.labelX0.TabIndex = 8;
+            this.labelX0.Text = "x(0)";
+            // 
+            // textBoxDt
+            // 
+            this.textBoxDt.Location = new System.Drawing.Point(426, 39);
+            this.textBoxDt.Name = "textBoxDt";
+            this.textBoxDt.Size = new System.Drawing.Size(89, 20);
+            this.textBoxDt.TabIndex = 7;
+            // 
+            // labelDt
+            // 
+            this.labelDt.AutoSize = true;
+            this.labelDt.Location = new System.Drawing.Point(406, 42);
+            this.labelDt.Name = "labelDt";
+            this.labelDt.Size = new System.Drawing.Size(14, 13);
+            this.labelDt.TabIndex = 6;
+            this.labelDt.Text = "dt";
+            // 
+            // textBoxTEnd
+            // 
+            this.textBoxTEnd.Location = new System.Drawing.Point(300, 39);
+            this.textBoxTEnd.Name = "textBoxTEnd";
+            this.textBoxTEnd.Size = new System.Drawing.Size(89, 20);
+            this.textBoxTEnd.TabIndex = 5;
+            // 
+            // labelTEnd
+            // 
+            this.labelTEnd.AutoSize = true;
+            this.labelTEnd.Location = new System.Drawing.Point(264, 42);
+            this.labelTEnd.Name = "labelTEnd";
+            this.labelTEnd.Size = new System.Drawing.Size(30, 13);
+            this.labelTEnd.TabIndex = 4;
+            this.labelTEnd.Text = "tEnd";
+            // 
+            // textBoxT0
+            // 
+            this.textBoxT0.Location = new System.Drawing.Point(169, 39);
+            this.textBoxT0.Name = "textBoxT0";
+            this.textBoxT0.Size = new System.Drawing.Size(89, 20);
+            this.textBoxT0.TabIndex = 3;
+            // 
+            // labelT0
+            // 
+            this.labelT0.AutoSize = true;
+            this.labelT0.Location = new System.Drawing.Point(145, 42);
+            this.labelT0.Name = "labelT0";
+            this.labelT0.Size = new System.Drawing.Size(18, 13);
+            this.labelT0.TabIndex = 2;
+            this.labelT0.Text = "t0";
+            // 
+            // textBoxMu
+            // 
+            this.textBoxMu.Location = new System.Drawing.Point(43, 39);
+            this.textBoxMu.Name = "textBoxMu";
+            this.textBoxMu.Size = new System.Drawing.Size(89, 20);
+            this.textBoxMu.TabIndex = 1;
+            // 
+            // labelMu
+            // 
+            this.labelMu.AutoSize = true;
+            this.labelMu.Location = new System.Drawing.Point(13, 42);
+            this.labelMu.Name = "labelMu";
+            this.labelMu.Size = new System.Drawing.Size(24, 13);
+            this.labelMu.TabIndex = 0;
+            this.labelMu.Text = "mu";
             // 
             // chart1
             // 
-            chartArea1.AxisX.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Alignment = System.Drawing.StringAlignment.Center;
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(23, 322);
+            this.chart1.Location = new System.Drawing.Point(15, 175);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series2.Color = System.Drawing.Color.Navy;
-            series2.Legend = "Legend1";
-            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series2.Name = "Series2";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            series3.Legend = "Legend1";
-            series3.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series3.Name = "Series3";
-            this.chart1.Series.Add(series1);
-            this.chart1.Series.Add(series2);
-            this.chart1.Series.Add(series3);
-            this.chart1.Size = new System.Drawing.Size(954, 445);
-            this.chart1.TabIndex = 13;
+            this.chart1.Size = new System.Drawing.Size(1049, 457);
+            this.chart1.TabIndex = 2;
             this.chart1.Text = "chart1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1052, 779);
+            this.ClientSize = new System.Drawing.Size(1081, 647);
             this.Controls.Add(this.chart1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.TabelaFunkcji);
+            this.Controls.Add(this.groupBoxInputs);
+            this.Controls.Add(this.labelAbout);
             this.Name = "Form1";
-            this.Text = "Testowanie metod różniczkowania numerycznego";
+            this.Text = "Van der Pol Oscillator Solver";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.TabelaFunkcji)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.groupBoxInputs.ResumeLayout(false);
+            this.groupBoxInputs.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -185,12 +232,22 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView TabelaFunkcji;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelAbout;
+        private System.Windows.Forms.GroupBox groupBoxInputs;
+        private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.Button buttonSolve;
+        private System.Windows.Forms.TextBox textBoxV0;
+        private System.Windows.Forms.Label labelV0;
+        private System.Windows.Forms.TextBox textBoxX0;
+        private System.Windows.Forms.Label labelX0;
+        private System.Windows.Forms.TextBox textBoxDt;
+        private System.Windows.Forms.Label labelDt;
+        private System.Windows.Forms.TextBox textBoxTEnd;
+        private System.Windows.Forms.Label labelTEnd;
+        private System.Windows.Forms.TextBox textBoxT0;
+        private System.Windows.Forms.Label labelT0;
+        private System.Windows.Forms.TextBox textBoxMu;
+        private System.Windows.Forms.Label labelMu;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
