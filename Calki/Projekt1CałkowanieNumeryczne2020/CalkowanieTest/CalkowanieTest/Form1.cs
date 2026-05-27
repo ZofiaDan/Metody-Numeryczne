@@ -1,208 +1,268 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using BIBLIOTEKA_NR1;
-using BIBLIOTEKA_NR1.CalkiPochodne;
+using System.Windows.Forms.DataVisualization.Charting;
 
 
 namespace CalkowanieTest
 {
     public partial class Form1 : Form
     {
+        private const double FresnelInfinityLimit = 0.5;
+        private const double DefaultStartStep = 0.1;
+        private const double MinSafeEps = 1e-8;
+        private const double NearZeroThreshold = 1e-12;
+
         public Form1()
         {
             InitializeComponent();
         }
-        
-        /// <summary>
-        /// Deklaracja obiektu do całkowania funkcji 
-        /// rzeczywistej zmiennej rzeczywistej
-        /// </summary>
-        CalkowanieFunkcji Calka;
-        double CalkaFun1;//Zmienna do wyrażenia pierwszej całki testującej
-        double CalkaFun2;//Zmienna do wyrażenia drugiej całki testującej
-        double fi = Math.PI / 6;//Zmienna pomocnicza do Fun2
-        double Ca; //Do przechowywania obliczonej całki
-        /// <summary>
-        /// Funkcja podcałkowa pierwszej całki
-        /// </summary>
-        /// <param name="x">Argument funkcji</param>
-        /// <returns>Zwracana wartość</returns>
-        public double Fun1(double x)
+
+        private double FresnelCosIntegrand(double t)
         {
-            return 1.0 / (5 + 3 * Math.Sin(x));
+            return Math.Cos((Math.PI * t * t) / 2.0);
         }
 
-        /// <summary>
-        /// Funkcja podcałkowa drugiej całki
-        /// </summary>
-        /// <param name="x">Argument funkcji</param>
-        /// <returns>Zwracana wartość</returns>
-        public double Fun2(double x)
+        private double FresnelSinIntegrand(double t)
         {
-            return 1.0 / (1 + 2 * x * Math.Cos(fi) + x * x);
+            return Math.Sin((Math.PI * t * t) / 2.0);
         }
 
-        /// <summary>
-        /// Funkcja wyznaczająca dokładność iteracji w ekstrapolacji
-        /// całkowania na podstawie zadanego parametru komponentu
-        /// numericUpDown1.Value
-        /// </summary>
-        /// <returns>Zwracana wartośc </returns>
-        double eps()
+        private double Eps()
         {
             return Math.Pow(10.0, -(double)numericUpDown1.Value);
         }
 
-        /// <summary>
-        /// Metoda podpięta pod zdarzenie Load generowane automatycznie
-        /// przy uruchamianiu projektu.
-        /// Inicjalizuje kontrolkę Tabela typu DataGridView 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Inicjalizacja Tabela typu DataGridView
             Tabela.RowCount = 2;
-            //Opi wierszy tabeli
-            Tabela.Rows[0].HeaderCell.Value = "Całka1";
-            Tabela.Rows[1].HeaderCell.Value = "Całka2";
-            //Wstpnie ustalona zerowa (pierwsza) pozycja wiersza
+            Tabela.Rows[0].HeaderCell.Value = "C(x)";
+            Tabela.Rows[1].HeaderCell.Value = "S(x)";
             comboBox1.SelectedIndex = 0;
-            //Podanie dokładnych wartości dwóch całek testujących 
-            //metodę numerycznego całkowania 
-            CalkaFun1 = 0.5 * (Math.Atan(2.0) - Math.Atan(0.75));
-            CalkaFun2 = 0.5 * fi / Math.Sin(fi);
+            RenderCornuSpiral();
         }
 
-        /// <summary>
-        /// Metoda klasy formularza realizująca całkowanie funkcji Fun(x) 
-        /// w przedziale od a do b z dokładnościa procesu ekstrapolacji eps
-        /// W klasie formularza mamy dwie funkcje do całkowania Fun1(x) oraz Fun2(x)
-        /// Metoda umożliwia optymalizację kodu przy całkowaniu tych dwóch funkcji
-        /// </summary>
-        /// <param name="Fun">Przekazanu egzemplarz funkcji do całkowania</param>
-        /// <param name="a">Początek przedziału całkowania</param>
-        /// <param name="b">Koniec przedziału całkowania</param>
-        /// <param name="eps">Dokładność zadanej tolerancji obliczeń procesu 
-        /// ekstrapolacji przy całkowaniu</param>
-        /// <returns>Zwracana wartość całki</returns>
-        private double Calkowanie(FunkcjaRealeReale Fun, double a, double b, double eps)
+        private double IntegrateBySelectedMethod(Func<double, double> fun, double a, double b, double eps)
         {
-            double h0 = 0.5 * Math.PI / 10;  //Wstępnie ustalony krok całkowania
-            double Ca = 0;
-            //Inicjalizacja obiektu Calka do całkowania funkcji Fun1 
-            //podanej przez konstruktora w przedziale od 0 do Math.PI / 2
-            Calka = new CalkowanieFunkcji(Fun, a, b, h0, 2.0, eps, 50);
-            //Wybór metody w zależności od właściwoci SelectedIndex komponentu comboBox1
+            var interval = Math.Abs(b - a);
+            var baseSteps = Math.Max(80, (int)Math.Ceiling(interval / DefaultStartStep));
+            var toleranceBoost = Math.Max(1.0, -Math.Log10(Math.Max(eps, MinSafeEps)));
+            var steps = Math.Max(80, (int)(baseSteps * toleranceBoost * 8.0));
+            if (steps % 2 != 0)
+            {
+                steps++;
+            }
+
             switch (comboBox1.SelectedIndex)
             {
-                case 0:   //Wybór metody Aitkena dla trapezów;
-                    Ca = Calka.MetodaAitkenaDlaTrapezow();
-                    break;
-                case 1:   //Wybór metody Aitkena Simpsona
-                    Ca = Calka.MetodaAitkenaSimpsona();
-
-                    break;
-                case 2:   //Wybór metody Aitkena dla prostokątów
-                    Ca = Calka.MetodaAitkenaDlaProstokatow();
-                    break;
+                case 1:
+                    return IntegrateSimpson(fun, a, b, steps);
+                case 2:
+                    return IntegrateMidpointRectangle(fun, a, b, steps);
+                default:
+                    return IntegrateTrapezoid(fun, a, b, steps);
             }
-            return Ca;
         }
 
-        /// <summary>
-        /// Metoda podpięta pod zdarzenie Click komponentu 
-        /// pictureBox1 klasy PictureBox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private bool TryIntegrateBySelectedMethod(Func<double, double> fun, double a, double b, double eps, out double value)
         {
-            //Zastosowanie metody klasy formularza do całkowania Fun1(x)
-            //w przedziale od 0 do PI / 2
-            Ca = Calkowanie(Fun1, 0, Math.PI / 2, eps());
-            //Wydruk wyników obliczeń
-            //Wynik dokładny z obliczeń analitycznych
-            Tabela[0, 0].Value = CalkaFun1.ToString();
-            //Wynik przybliżony w oparciu o ekstrapolację całkową
-            Tabela[1,0].Value = Ca.ToString();
-            //Błąd rzeczywisty
-            Tabela[2, 0].Value = Math.Abs(Ca - CalkaFun1).ToString("E");
+            value = 0.0;
+            try
+            {
+                value = IntegrateBySelectedMethod(fun, a, b, eps);
+                return IsFinite(value);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        /// <summary>
-        /// Metoda podpięta pod zdarzenie Click komponentu 
-        /// pictureBox2 klasy PictureBox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private double IntegrateTrapezoid(Func<double, double> fun, double a, double b, int n)
         {
-            //Zastosowanie metody klasy formularza do całkowania Fun2(x)
-            //w przedziale od 0 do 1
-            Ca = Calkowanie(Fun2, 0, 1, eps());
-            //Wydruk wyników obliczeń
-            //Wynik dokładny z obliczeń analitycznych
-            Tabela[0, 1].Value = CalkaFun2.ToString();
-            //Wynik przybliżony w oparciu o ekstrapolację całkową
-            Tabela[1, 1].Value = Ca.ToString();
-            //Błąd rzeczywisty
-            Tabela[2, 1].Value = Math.Abs(Ca - CalkaFun2).ToString("E");
+            var h = (b - a) / n;
+            var sum = 0.5 * (fun(a) + fun(b));
+            for (var i = 1; i < n; i++)
+            {
+                sum += fun(a + i * h);
+            }
+
+            return sum * h;
         }
 
-        /// <summary>
-        /// Metoda klasy formularza podpięta pod zdarzen Click
-        /// komponentu button1 realizująca graficznie zależność 
-        /// błędu rzeczywistego całkowania od zadanej tolerancji
-        /// ekstrapolacji całkowania dla Fun1(x) oraz Fun2(x)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        private double IntegrateMidpointRectangle(Func<double, double> fun, double a, double b, int n)
+        {
+            var h = (b - a) / n;
+            var sum = 0.0;
+            for (var i = 0; i < n; i++)
+            {
+                var midpoint = a + (i + 0.5) * h;
+                sum += fun(midpoint);
+            }
+
+            return sum * h;
+        }
+
+        private double IntegrateSimpson(Func<double, double> fun, double a, double b, int n)
+        {
+            if (n % 2 != 0)
+            {
+                n++;
+            }
+
+            var h = (b - a) / n;
+            var sumOdd = 0.0;
+            var sumEven = 0.0;
+            for (var i = 1; i < n; i++)
+            {
+                var value = fun(a + i * h);
+                if (i % 2 == 0)
+                {
+                    sumEven += value;
+                }
+                else
+                {
+                    sumOdd += value;
+                }
+            }
+
+            return (h / 3.0) * (fun(a) + fun(b) + 4.0 * sumOdd + 2.0 * sumEven);
+        }
+
+        private bool IsFinite(double value)
+        {
+            return !(double.IsNaN(value) || double.IsInfinity(value));
+        }
+
+        private double FresnelC(double t, double eps)
+        {
+            if (Math.Abs(t) < NearZeroThreshold)
+            {
+                return 0.0;
+            }
+
+            var sign = Math.Sign(t);
+            var absT = Math.Abs(t);
+            var value = IntegrateBySelectedMethod(FresnelCosIntegrand, 0.0, absT, eps);
+            return sign < 0 ? -value : value;
+        }
+
+        private double FresnelS(double t, double eps)
+        {
+            if (Math.Abs(t) < NearZeroThreshold)
+            {
+                return 0.0;
+            }
+
+            var sign = Math.Sign(t);
+            var absT = Math.Abs(t);
+            var value = IntegrateBySelectedMethod(FresnelSinIntegrand, 0.0, absT, eps);
+            return sign < 0 ? -value : value;
+        }
+
+        private void RenderCornuSpiral()
+        {
+            var tMax = (double)numericUpDown2.Value;
+            var samples = (int)numericUpDown3.Value;
+            var eps = Math.Max(Eps(), MinSafeEps);
+            var series = chart1.Series["CornuSpiral"];
+            series.Points.Clear();
+            var area = chart1.ChartAreas[0];
+            area.AxisX.Minimum = -0.8;
+            area.AxisX.Maximum = 0.8;
+            area.AxisY.Minimum = -0.8;
+            area.AxisY.Maximum = 0.8;
+
+            if (samples <= 0 || tMax <= 0.0)
+            {
+                return;
+            }
+
+            var validPoints = 0;
+            for (var i = 0; i <= samples; i++)
+            {
+                var t = -tMax + (2.0 * tMax * i) / samples;
+                if (Math.Abs(t) < NearZeroThreshold)
+                {
+                    series.Points.AddXY(0.0, 0.0);
+                    validPoints++;
+                    continue;
+                }
+
+                if (!TryIntegrateBySelectedMethod(FresnelCosIntegrand, 0.0, Math.Abs(t), eps, out var cValue))
+                {
+                    continue;
+                }
+
+                if (!TryIntegrateBySelectedMethod(FresnelSinIntegrand, 0.0, Math.Abs(t), eps, out var sValue))
+                {
+                    continue;
+                }
+
+                var c = t < 0 ? -cValue : cValue;
+                var s = t < 0 ? -sValue : sValue;
+                if (!IsFinite(c) || !IsFinite(s))
+                {
+                    continue;
+                }
+
+                series.Points.AddXY(c, s);
+                validPoints++;
+            }
+
+            if (validPoints == 0)
+            {
+                MessageBox.Show(
+                    "Nie udało się narysować spirali dla podanych parametrów. Spróbuj mniejszego zakresu |t| lub mniejszej dokładności.",
+                    "Błąd obliczeń",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            FillResultTable(tMax, eps);
+        }
+
+        private void FillResultTable(double tMax, double eps)
+        {
+            if (!TryIntegrateBySelectedMethod(FresnelCosIntegrand, 0.0, tMax, eps, out var cAtTMax))
+            {
+                cAtTMax = double.NaN;
+            }
+
+            if (!TryIntegrateBySelectedMethod(FresnelSinIntegrand, 0.0, tMax, eps, out var sAtTMax))
+            {
+                sAtTMax = double.NaN;
+            }
+
+            Tabela[0, 0].Value = FresnelInfinityLimit.ToString("F6");
+            Tabela[1, 0].Value = IsFinite(cAtTMax) ? cAtTMax.ToString("F6") : "n/a";
+            Tabela[2, 0].Value = IsFinite(cAtTMax)
+                ? Math.Abs(cAtTMax - FresnelInfinityLimit).ToString("E2")
+                : "n/a";
+
+            Tabela[0, 1].Value = FresnelInfinityLimit.ToString("F6");
+            Tabela[1, 1].Value = IsFinite(sAtTMax) ? sAtTMax.ToString("F6") : "n/a";
+            Tabela[2, 1].Value = IsFinite(sAtTMax)
+                ? Math.Abs(sAtTMax - FresnelInfinityLimit).ToString("E2")
+                : "n/a";
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            double eps1;
-            double df;
-            double Ca = 0;
-            chart1.Series[0].Points.Clear();
-            chart1.Series[1].Points.Clear();
-            chart1.ChartAreas[0].AxisX.Interval = 1;
-            chart1.ChartAreas[0].AxisY.Interval = 1;
-            //Ustalenie na komponencie chart1 przedziałów zmienności na osi X oraz Y 
-            chart1.ChartAreas[0].AxisX.Minimum = -12;
-            chart1.ChartAreas[0].AxisX.Maximum = -3;
-            chart1.ChartAreas[0].AxisY.Minimum = -16;
-            chart1.ChartAreas[0].AxisY.Maximum = -2;
-            chart1.ChartAreas[0].AxisX.Title = "Tolerancja obliczen Log10(eps) ";
-            chart1.ChartAreas[0].AxisY.Title = "Błąd rzeczywisty Log10(|blad|) ";
-            for (int i=3; i<=12; i++)
-            {
-                //Zadawana tolerancja obliczeń ekstrapolacji całkowania
-                eps1 = Math.Pow(10.0, -i); 
-                //Całkowanie Fun1(x) w przedziale od 0 do PI/2
-                Ca = Calkowanie(Fun1, 0, Math.PI / 2, eps1);
-                //df- błąd rzeczywisty całkowania Fun1 dla zadanego eps
-                df = Math.Abs(Ca - CalkaFun1);
-                //Kontynuacja zapisu graficznego w skali logarytmicznej 
-                chart1.Series[0].Points.AddXY(Math.Log10(eps1),Math.Log10(df));
-                //Całkowanie Fun2(x) w przedziale od 0 do 1
-                Ca = Calkowanie(Fun2, 0, 1, eps1);
-                //df- błąd rzeczywisty całkowania Fun2 dla zadanego eps
-                df = Math.Abs(Ca - CalkaFun2);
-                //Kontynuacja zapisu graficznego w skali logarytmicznej 
-                chart1.Series[1].Points.AddXY(Math.Log10(eps1), Math.Log10(df));
-            }
+            RenderCornuSpiral();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void Inputs_ValueChanged(object sender, EventArgs e)
         {
+            if (!IsHandleCreated)
+            {
+                return;
+            }
 
+            RenderCornuSpiral();
         }
-    }//Koniec public partial class Form1 : Form 
-}//Koniec CalkowanieTest
+    }
+}
