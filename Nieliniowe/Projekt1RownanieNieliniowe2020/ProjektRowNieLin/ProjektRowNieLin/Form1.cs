@@ -248,9 +248,16 @@ namespace ProjektRowNieLin
             root.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 560));
             root.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
 
-            // Left column layouts
+            // Left column layouts with scroll
+            var leftScroll = new Panel();
+            leftScroll.Dock = DockStyle.Fill;
+            leftScroll.AutoScroll = true;
+            leftScroll.BorderStyle = BorderStyle.None;
+
             var left = new TableLayoutPanel();
-            left.Dock = DockStyle.Fill;
+            left.Dock = DockStyle.Top;
+            left.AutoSize = true;
+            left.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             left.ColumnCount = 1;
             left.RowCount = 3;
             left.RowStyles.Add(new RowStyle(SizeType.Absolute, 240));
@@ -362,7 +369,7 @@ namespace ProjektRowNieLin
             picturesLayout.ColumnCount = 1;
             picturesLayout.RowCount = 1;
             picturesLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 110));
-            picturesLayout.Controls.Add(pictureBox1, 0, 0);
+            //picturesLayout.Controls.Add(pictureBox1, 0, 0);
 
             groupEquations.Controls.Add(equationsLayout);
             groupEquations.Controls.Add(picturesLayout);
@@ -433,6 +440,7 @@ namespace ProjektRowNieLin
             groupIterations.Controls.Add(dataGridViewIterations);
 
             // Assemble
+            leftScroll.Controls.Add(left);
             left.Controls.Add(groupProblem, 0, 0);
             left.Controls.Add(groupEquations, 0, 1);
             left.Controls.Add(groupParameters, 0, 2);
@@ -440,7 +448,7 @@ namespace ProjektRowNieLin
             right.Controls.Add(groupVisualization, 0, 0);
             right.Controls.Add(groupIterations, 0, 1);
 
-            root.Controls.Add(left, 0, 0);
+            root.Controls.Add(leftScroll, 0, 0);
             root.Controls.Add(right, 1, 0);
 
             // Move existing controls under the new root
